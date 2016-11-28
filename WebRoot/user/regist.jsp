@@ -22,16 +22,35 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+<script type="text/javascript">
+	/*
+	 *如果一个表单项的name和<img>的id相同，那么可能会出问题，一般只有IE会出问题
+	 */
+	function _change() {
+		/*
+		 *获取<img>元素
+		 */
+		var img = document.getElementById("verifyCode");
+		img.src = "<c:url value='/VerifyCodeServlet' />?xxx="
+				+ new Date().getTime();
+	}
+</script>
 </head>
 
 <body>
 	<h1>注册</h1>
+	<p style="color:red;font-weight:900">${msg }</p>
 	<%--${pageContext.request.contextPath}/RegistServlet--%>
+
 	<form action="<c:url value='/RegistServlet' />" method="post">
-		用户名：<input type="text" name="username" /><br /> 
-		密 码:<inputtype="password" name="password" /><br />
-		 <input type="submit" value="注册" />
+		用户名:<input type="text" name="username" value="${user.username }" /><br />
+		密 码:<input type="password" name="password" value="${user.password }" /><br />
+		验证码:<input type="text" name="verifyCode" value="${user.verifyCode }"
+			size="3" /> <img id="verifyCode"
+			src="<c:url value='/VerifyCodeServlet' />" /> <a
+			href="javascript:_change()">看不清,换一张</a><br /> <input type="submit"
+			value="注册" />
 	</form>
+
 </body>
 </html>

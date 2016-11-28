@@ -16,7 +16,8 @@ public class UserDaoTest {
 	@Test
 	public void testFindByUserName() {
 		UserDao userDao = new UserDao();
-
+		User user=userDao.findByUserName("张三");
+		System.out.println(user);
 	}
 
 	@Test
